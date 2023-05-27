@@ -1,0 +1,30 @@
+//Rapid Silicon Gemini SoC platform
+
+//Memory
+ddr: Memory.MappedMemory @ sysbus 0x0
+    size: 0x80000000
+
+sram: Memory.MappedMemory @ sysbus 0x80000000
+    size: 0x80000
+
+//I/O
+uart1: UART.NS16550 @ sysbus 0xF1020000
+    //add specs ie registers and IRQ
+    //eg IRQ -> PLIC@[number]
+
+//acpu - Andes a45
+cpu1: CPU.VexRiscv @ sysbus
+    //add specs
+    cpuType: "rv32imac" //a45 datasheet says rv32imacn
+    //priviledgeArchitecture: 
+    //timeProvider:
+    hartId: 1
+
+//bcpu - Andes n22
+//cpu0: CPU.____ @ sysbus
+    //cpuType: "rv32imac" //datasheet says rv32imac or rv32emac
+    //hartId: 0
+    
+//plic: 
+    //numberOfSources:
+    //numberOfContexts:
