@@ -1,0 +1,24 @@
+:name: LiteX VexRiscv
+:description: This script runs LiteX BIOS on VexRiscv CPU.
+
+$name?="LiteX"
+
+using sysbus
+mach create $name
+machine LoadPlatformDescription @/home/rohanjain/repos/renode-verilator/litex_vexriscv_axiram.repl
+
+$bin?=@/home/rohanjain/repos/renode-verilator/lab1/lab1/lab1.elf
+$axiRam?=@/home/rohanjain/repos/renode-verilator-integration/apps/axi_ram/build/Vtop
+
+showAnalyzer sysbus.uart
+
+axiRam SimulationFilePathLinux $axiRam
+
+macro reset
+"""
+    sysbus LoadELF $bin
+"""
+
+runMacro $reset
+
+

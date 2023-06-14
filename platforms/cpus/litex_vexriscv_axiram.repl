@@ -1,0 +1,22 @@
+using "/home/rohanjain/repos/renode-verilator/litex_common.repl"
+
+cpu: CPU.VexRiscv @ sysbus
+
+timer0: Timers.LiteX_Timer @ {
+        sysbus 0x60002800;
+        sysbus 0xE0002800 // shadow
+    }
+    frequency: 100000000
+
+timer0:
+    -> cpu@1
+
+uart:
+    -> cpu@2
+
+eth:
+    -> cpu@3
+    
+axiRam: Verilated.BaseDoubleWordVerilatedPeripheral @ sysbus <0x70000000, +0x100> //double check region
+    frequency: 100000000
+    
