@@ -1,0 +1,23 @@
+steps for verilating custom RTL in renode
+	
+using pop-os (Ubuntu 22.04) on virtualbox with windows host
+	
+1. created folders in renode-verilator-integration repository called renode-verilator-integration/apps/axi_ram
+2. Copied sim_main.cpp, axi_ram.v, and CMakeLists.txt.template from repository into axi_ram folder
+3. Edited CMakeLists.txt with project name, C/verilog files, and compilation flags (replicated from renode-verilator-integration/samples/ram)
+4. Created "build" folder and inside, build using:
+
+	"cmake -DCMAKE_BUILD_TYPE=Release -DUSER_RENODE_DIR=/home/rohanjain/repos/renode -DLIBOPENLIBM=/home/rohanjain/repos/renode-verilator-integration/lib/libopenlibm-Linux-x86_64.a ${home/rohanjain/repos/verilator:+"-DUSER_VERILATOR_DIR=$home/rohanjain/repos/verilator"} /home/rohanjain/repos/renode-verilator-integration/apps/axi_ram/" , "make"
+		
+	Note: tried adding "-DCMAKE_POSITION_INDEPENDENT_CODE=OFF" in command line arguments, didn't solve issue
+	issues with compilation and verilog file: encountered errors with verilog file (CASEINCOMPLETE and WIDTH), fixed by casting to proper width and ignoring caseincomplete. Lines 202 and 304 were adjusted for width and lines 193-250 were ignored using "verilator lint_off CASEINCOMPLETE". Later added these in cmake file and attempted running on renode with original verilog file with same outcome.
+	
+5. Added peripheral to .repl file:
+	axiRam: Verilated.BaseDoubleWordVerilatedPeripheral @ sysbus <0x70000000, +0x100>
+		frequency: 100000000
+6. Added "axiRam SimulationFilePathLinux @/home/rohanjain/repos/renode-verilator-integration/apps/axi_ram/build/Vtop" to .resc file
+7. Opened renode, loaded in .resc file, recieved error:
+
+"Error while opening dynamic library: /home/rohanjain/repos/renode-verilator-integration/apps/axi_ram/build/Vtop: cannot dynamically load position-independent executable"
+	
+	
