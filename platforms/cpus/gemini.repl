@@ -8,7 +8,7 @@ sram: Memory.MappedMemory @ sysbus 0x80000000
     size: 0x80000
 
 //I/O
-uart1: UART.NS16550 @ sysbus 0xF1020000
+uart0: UART.NS16550 @ sysbus 0xF1010020
     //add specs ie registers and IRQ
     //eg IRQ -> PLIC@[number]
 
@@ -18,7 +18,7 @@ cpu1: CPU.VexRiscv @ sysbus
     cpuType: "rv32imac" //a45 datasheet says rv32imacn
     //priviledgeArchitecture: 
     //timeProvider:
-    hartId: 1
+    hartId: 0
 
 //bcpu - Andes n22
 //cpu0: CPU.____ @ sysbus

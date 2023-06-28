@@ -7,12 +7,14 @@ mach create $name
 
 machine LoadPlatformDescription @platforms/cpus/gemini.repl
 
-$bin?=@$HOME/repos/EmbeddedCommon-dev/apps/a45_application/build/a45_application.elf
+$bin?=@$HOME/repos/renode/hello/build/bootrom.elf
 
-showAnalyzer sysbus.uart1
+showAnalyzer sysbus.uart0
 
 macro reset
 """
     sysbus LoadELF $bin
 """
 runMacro $reset
+
+machine StartGdbServer 3333
