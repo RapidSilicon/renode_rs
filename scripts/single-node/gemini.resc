@@ -1,16 +1,17 @@
 :name: RapidSilicon Gemini test script
 :description: This script will run a simple hello world program implementing basic features of Gemini
 
+EnsureTypeIsLoaded "Antmicro.Renode.Peripherals.CPU.RiscV32"
+
+i @/home/jorge-rs/repos/renode/renode_rs/src/Infrastructure/src/Emulator/Cores/RiscV/Andes_A45.cs
+
 using sysbus
 $name?="Gemini"
 mach create $name
 
-machine LoadPlatformDescription @/home/rohanjain/repos/gemini_initial_test.repl
+machine LoadPlatformDescription @platforms/cpus/gemini.repl
 
-$bin_n22app ?= @/home/rohanjain/repos/EmbeddedCommon-dev/apps/n22_application/build/n22_application.elf
-$bin_bootrom ?= @/home/rohanjain/repos/N22_Bootrom/build/bootrom.elf
-$bin_a45app ?= @/home/rohanjain/repos/EmbeddedCommon-dev/apps/a45_application/build/a45_application.elf
-$bin_a45renode_app ?= @/home/rohanjain/repos/EmbeddedCommon-dev/apps/a45_renode/build/bootrom.elf
+$bin_a45renode_app ?= @/home/jorge-rs/repos/EmbeddedCommon-dev/apps/a45_renode/build/bootrom.elf
 
 showAnalyzer sysbus.uart1
 
@@ -22,3 +23,4 @@ macro reset
 runMacro $reset
 
 machine StartGdbServer 3333
+
