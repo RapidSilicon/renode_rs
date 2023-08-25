@@ -3,7 +3,7 @@
 
 EnsureTypeIsLoaded "Antmicro.Renode.Peripherals.CPU.RiscV32"
 
-i @/home/jorge-rs/repos/renode/renode_rs/src/Infrastructure/src/Emulator/Cores/RiscV/Andes_A45.cs
+i @/home/rshah/work/git/renode_rs/src/Infrastructure/src/Emulator/Cores/RiscV/Andes_A45.cs
 
 using sysbus
 $name?="Gemini"
@@ -11,7 +11,7 @@ mach create $name
 
 machine LoadPlatformDescription @platforms/cpus/gemini.repl
 
-$bin_a45renode_app ?= @/home/jorge-rs/repos/EmbeddedCommon-dev/apps/a45_renode/build/bootrom.elf
+$bin_a45renode_app ?= @/home/rshah/work/git/EmbeddedCommon-dev/apps/a45_renode/build/bootrom.elf
 
 showAnalyzer sysbus.uart1
 
