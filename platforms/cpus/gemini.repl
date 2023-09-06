@@ -10,26 +10,18 @@ sram: Memory.MappedMemory @ sysbus 0x80000000
 scu: Memory.MappedMemory @ sysbus 0xF1000000
     size: 0x8000
 
-//I/O
-uart1: UART.NS16550 @ sysbus 0xF1020020
-    IRQ -> plic@4
+uart1: UART.ATCUART100 @ sysbus 0xF1020000
+    IRQ -> plic@5
     //clockFrequency : 66000000
 
-//acpu - Andes a45
-cpu1: CPU.RiscV32 @ sysbus
+cpu1: CPU.Andes_A45 @ sysbus
     cpuType: "rv32gc"
     //priviledgeArchitecture: 
     timeProvider: empty
     hartId: 0
-
-//bcpu - Andes n22
-//cpu0: CPU.____ @ sysbus
-    //cpuType: "rv32imac"
-    //hartId: 1
     
 plic: IRQControllers.PlatformLevelInterruptController @ sysbus 0xE4000000
     0 -> cpu1@11
     numberOfSources: 1023
     numberOfContexts: 15872
     prioritiesEnabled: true
-
