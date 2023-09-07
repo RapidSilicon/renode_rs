@@ -1,0 +1,21 @@
+:name: RapidSilicon Gemini test script
+:description: This script will run a simple hello world program implementing basic features of Gemini
+
+using sysbus
+$name?="Gemini"
+mach create $name
+
+machine LoadPlatformDescription @platforms/cpus/gemini.repl
+
+$bin ?= @/home/jorge-rs/repos/EmbeddedCommon-dev/apps/a45_renode/build/bootrom.elf
+
+showAnalyzer sysbus.uart1
+
+macro reset
+"""
+    sysbus LoadELF $bin
+"""
+
+runMacro $reset
+
+machine StartGdbServer 3333
