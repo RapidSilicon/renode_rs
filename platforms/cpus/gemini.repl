@@ -1,0 +1,27 @@
+//Gemini SoC platform
+
+//Memory
+ddr: Memory.MappedMemory @ sysbus 0x0
+    size: 0x80000000
+
+sram: Memory.MappedMemory @ sysbus 0x80000000
+    size: 0x40000
+
+scu: Memory.MappedMemory @ sysbus 0xF1000000
+    size: 0x8000
+
+uart1: UART.ATCUART100 @ sysbus 0xF1020000
+    IRQ -> plic@5
+    //clockFrequency : 66000000
+
+cpu1: CPU.Andes_A45 @ sysbus
+    cpuType: "rv32gc"
+    //priviledgeArchitecture: 
+    timeProvider: empty
+    hartId: 0
+    
+plic: IRQControllers.PlatformLevelInterruptController @ sysbus 0xE4000000
+    0 -> cpu1@11
+    numberOfSources: 1023
+    numberOfContexts: 15872
+    prioritiesEnabled: true
