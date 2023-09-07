@@ -5,7 +5,7 @@ ddr: Memory.MappedMemory @ sysbus 0x0
     size: 0x80000000
 
 sram: Memory.MappedMemory @ sysbus 0x80000000
-    size: 0x80000
+    size: 0x40000
 
 scu: Memory.MappedMemory @ sysbus 0xF1000000
     size: 0x8000
