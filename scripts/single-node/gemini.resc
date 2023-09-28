@@ -7,7 +7,9 @@ mach create $name
 
 machine LoadPlatformDescription @platforms/cpus/gemini.repl
 
-$bin ?= @/home/jorge-rs/repos/EmbeddedCommon-dev/apps/a45_renode/build/bootrom.elf
+axiram SimulationFilePathLinux @/home/jorge-rs/repos/renode/renode-verilator-integration/samples/ram/build/libVtop.so
+
+$bin ?= @/home/jorge-rs/repos/renode/EmbeddedCommon-dev/apps/a45_renode/build/bootrom.elf
 
 showAnalyzer sysbus.uart1
 

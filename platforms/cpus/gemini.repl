@@ -25,3 +25,6 @@ plic: IRQControllers.PlatformLevelInterruptController @ sysbus 0xE4000000
     numberOfSources: 1023
     numberOfContexts: 15872
     prioritiesEnabled: true
+
+axiram: Verilated.BaseDoubleWordVerilatedPeripheral @ sysbus <0x90000000, +0x100>
+    frequency: 100000000
