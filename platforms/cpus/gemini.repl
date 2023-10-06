@@ -13,6 +13,8 @@ scu: Memory.MappedMemory @ sysbus 0xF1000000
 uart1: UART.ATCUART100 @ sysbus 0xF1020000
     IRQ -> plic@5
     //clockFrequency : 66000000
+    
+pit: Timers.ATCPIT100 @ sysbus 0xF1050000
 
 cpu1: CPU.Andes_A45 @ sysbus
     cpuType: "rv32gc"
