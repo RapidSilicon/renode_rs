@@ -1,0 +1,21 @@
+:name: RapidSilicon Virgo test script
+:description: This script will run a simple hello world program implementing basic features of Virgo
+
+using sysbus
+$name?="Virgo"
+mach create $name
+
+machine LoadPlatformDescription @platforms/cpus/rs_virgo.repl
+
+$bin ?= $CWD/../N22_Bootrom/EmbeddedCommon-dev/apps/n22_application/build/n22_app.elf
+
+showAnalyzer sysbus.uart0
+
+macro reset
+"""
+    sysbus LoadELF $bin
+"""
+
+runMacro $reset
+
+machine StartGdbServer 3333
