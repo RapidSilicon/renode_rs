@@ -7,13 +7,29 @@ mach create $name
 
 machine LoadPlatformDescription @platforms/cpus/gemini.repl
 
-$bin ?= @/home/jorge-rs/repos/EmbeddedCommon-dev/apps/a45_renode/build/bootrom.elf
+$bin ?= @/home/rohanjain/repos/EmbeddedCommon-dev/apps/a45_application/build/a45_application.elf
 
 showAnalyzer sysbus.uart1
 
 macro reset
 """
     sysbus LoadELF $bin
+    
+    :sysbus.pit WriteDoubleWord 0x20 2
+    :sysbus.pit WriteDoubleWord 0x30 2
+    :sysbus.pit WriteDoubleWord 0x40 2
+    :sysbus.pit WriteDoubleWord 0x50 2
+    
+    :sysbus.pit WriteDoubleWord 0x14 0x3333
+    
+    :sysbus.pit WriteDoubleWord 0x24 0xFFEFCF8F
+    :sysbus.pit WriteDoubleWord 0x24 0xFFFFAAAA
+    :sysbus.pit WriteDoubleWord 0x34 0xEEEE9999
+    :sysbus.pit WriteDoubleWord 0x44 0xDDDD8888
+    :sysbus.pit WriteDoubleWord 0x54 0xCCCC7777
+    
+    :sysbus.pit WriteDoubleWord 0x1c 0x3333
+    
 """
 
 runMacro $reset

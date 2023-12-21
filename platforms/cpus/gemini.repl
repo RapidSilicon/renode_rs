@@ -10,11 +10,16 @@ sram: Memory.MappedMemory @ sysbus 0x80000000
 scu: Memory.MappedMemory @ sysbus 0xF1000000
     size: 0x8000
 
+//peripherals
 uart1: UART.ATCUART100 @ sysbus 0xF1020000
-    IRQ -> plic@5
+    IRQ -> plic @ 5
     //clockFrequency : 66000000
     
 pit: Timers.ATCPIT100 @ sysbus 0xF1050000
+    IRQ -> plic @ 1
+
+gpio: GPIOPort.ATCGPIO100 @ sysbus 0xA0002000 //dummy address, needs to be changed
+    IRQ -> plic @ 8
 
 cpu1: CPU.Andes_A45 @ sysbus
     cpuType: "rv32gc"
