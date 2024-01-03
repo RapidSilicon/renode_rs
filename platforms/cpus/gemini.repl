@@ -28,3 +28,6 @@ plic: IRQControllers.PlatformLevelInterruptController @ sysbus 0xE4000000
 
 axiram: Verilated.BaseDoubleWordVerilatedPeripheral @ sysbus <0x90000000, +0x100>
     frequency: 100000000
+
+ahbadd: Verilated.BaseDoubleWordVerilatedPeripheral @ sysbus <0xA0000000, +0x100>
+    frequency: 100000000
