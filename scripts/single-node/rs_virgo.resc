@@ -7,7 +7,7 @@ mach create $name
 
 machine LoadPlatformDescription @platforms/cpus/rs_virgo.repl
 
-$bin ?= $CWD/../N22_Bootrom/EmbeddedCommon-dev/apps/n22_application/build/n22_app.elf
+$bin ?= @/home/josfemova-rs/REPOSITORIES/N22_Bootrom/EmbeddedCommon-dev/apps/n22_application/build/n22_app.elf
 
 showAnalyzer sysbus.uart0
 
