@@ -1,0 +1,61 @@
+// =======================
+// core
+// =======================
+cpu0: CPU.Andes_N22 @ sysbus
+    timeProvider: empty
+    hartId: 0
+
+clic: Memory.MappedMemory @ sysbus 0xE2000000
+    size: 0x10000
+
+// base memories
+ilm: Memory.MappedMemory @ sysbus 0xA0200000
+    size: 0x10000
+
+dlm: Memory.MappedMemory @ sysbus 0xA0300000
+    size: 0x8000
+
+flash: Memory.MappedMemory @ sysbus 0xB0000000
+    size: 0x10000000
+
+// =======================
+// platform peripherals
+// =======================
+button1: Miscellaneous.Button @ sysbus
+    invert: false
+    -> scu@2
+
+scu: Miscellaneous.RS_SystemControlUnit @ sysbus 0xA0110000
+    version: 0x0 
+    bcpu: cpu0
+
+xcb: Memory.MappedMemory @ sysbus 0xA0710000
+    size: 0x10000
+
+pufcc: Memory.MappedMemory @ sysbus 0xA0130000
+    size: 0x10000
+
+// =======================
+// misc peripherlas
+// =======================
+
+// not implemented
+spi: Memory.MappedMemory @ sysbus 0xA0800000
+    size: 0x8000
+wdt: Memory.MappedMemory @ sysbus 0xA0120000
+    size: 0x4000
+i2c: Memory.MappedMemory @ sysbus 0xA0410000
+    size: 0x10000
+dma: Memory.MappedMemory @ sysbus 0xA0600000
+    size: 0x10000
+
+// implemented
+gpt: Timers.ATCPIT100 @ sysbus 0xA0520000
+
+gpio: GPIOPort.ATCGPIO100 @ sysbus 0xA0510000
+    cfgGpioNum: 8 
+
+uart0: UART.ATCUART100 @ sysbus 0xA0420000
+    //IRQ -> plic@5
+    //clockFrequency : 66000000
+
