@@ -7,12 +7,30 @@ mach create $name
 
 machine LoadPlatformDescription @platforms/cpus/rs_virgo.repl
 
-$bin ?= @/home/josfemova-rs/REPOSITORIES/N22_Bootrom/EmbeddedCommon-dev/apps/n22_application/build/n22_app.elf
+$bin ?= @/nfs_home/makbar/cli/EmbeddedCommon-dev/apps/n22_application/build/n22_app.elf
 
 showAnalyzer sysbus.uart0
 
 macro reset
-"""
+""" 
+    sysbus WriteDoubleWord 0xA0800000 0x12345678
+    sysbus WriteDoubleWord 0xA0800004 0x23456789
+    sysbus WriteDoubleWord 0xA0800008 0x34567890
+    sysbus WriteDoubleWord 0xA080000C 0x45678901
+
+    sysbus WriteDoubleWord 0xA0800010 0x56789012
+    sysbus WriteDoubleWord 0xA0800014 0x56789013
+    sysbus WriteDoubleWord 0xA0800018 0x67890123
+    sysbus WriteDoubleWord 0xA080001C 0x67801234
+   
+
+   sysbus.dma WriteDoubleWord 0x48 0xA0800000
+    sysbus.dma WriteDoubleWord 0x4C 0xA0410000
+    sysbus.dma WriteDoubleWord 0x54 0x00
+    sysbus.dma WriteDoubleWord 0x50 0
+    sysbus.dma WriteDoubleWord 0x44 0x21680001
+   
+   
     sysbus LoadELF $bin
 """
 
