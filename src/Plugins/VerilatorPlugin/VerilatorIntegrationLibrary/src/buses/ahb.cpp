@@ -27,9 +27,9 @@ AHB::AHB(uint32_t dataWidth, uint32_t addrWidth) : BaseAHB(dataWidth, addrWidth)
 void AHB::tick(bool countEnable, uint64_t steps = 1)
 {
     for(uint64_t i = 0; i < steps; i++) {
-        *hclk = 1;
+        *clk = 1;
         evaluateModel();
-        *hclk = 0;
+        *clk = 0;
         evaluateModel();
     }
 
@@ -59,29 +59,34 @@ void AHB::write(int width, uint64_t addr, uint64_t value)
         sprintf(msg, msg, width);
         throw msg;
     }
-    *htrans = 0;
-    *hwrite = 0;
-    *hsize = 0;
-    *hburst = 0;
-    *hprot = 0;
-    *error = 0;
+    *ahb_htrans = 2;
+    *ahb_hsel = 0;
+    *ahb_hwrite = 0;
+    *ahb_hsize = 0;
+    *ahb_hburst = 0;
+    *ahb_hprot = 1;
+    *ahb_hmastlock = 0;
+    *ahb_hnonsec = 0;
+    *ahb_hreadyin = 0;
 
     tick(true);
 
-    *htrans = 2;
-    *hwrite = 1;
-    *hsize = 2;
+    *ahb_haddr = addr;
+    *ahb_hwdata = value;
 
-    *haddr = addr;
-    *hwdata = value;
+    *ahb_hwrite = 1;
+    *ahb_hsize = 2;
 
-    timeoutTick(hready, 1);
+    timeoutTick(ahb_hreadyout, 1);
 
-    *hsel = 1;
+    *ahb_hsel = 1;
 
     tick(true);
 
-    *hsel = 0;
+    *ahb_hsel = 0;
+    *ahb_hwrite = 0;
+    *ahb_htrans = 0;
+    *ahb_hsize = 0;
 
     tick(true);
 }
@@ -93,23 +98,36 @@ uint64_t AHB::read(int width, uint64_t addr)
         sprintf(msg, msg, width);
         throw msg;
     }
-    *hsel = 1;
-    *hwrite = 0;
-
-    *htrans = 2;
-    *hsize = 2;
-
-    *haddr = addr;
-
-    timeoutTick(hready, 1);
-
-    *hsel = 1;
+ 
+    *ahb_htrans = 2;
+    *ahb_hsel = 0;
+    *ahb_hwrite = 0;
+    *ahb_hsize = 0;
+    *ahb_hburst = 0;
+    *ahb_hprot = 1;
+    *ahb_hmastlock = 0;
+    *ahb_hnonsec = 0;
+    *ahb_hreadyin = 0;
+    *ahb_haddr = addr;
 
     tick(true);
 
-    uint64_t result = *hrdata;
+    *ahb_hsize = 2;
 
-    *hsel = 0;
+    timeoutTick(ahb_hreadyout, 1);
+
+    *ahb_hsel = 1;
+
+    timeoutTick(ahb_hreadyout, 0);
+
+    uint64_t result = *ahb_hrdata;
+    *ahb_hsel = 0;
+
+    tick(true);
+
+    *ahb_hsel = 0;
+    *ahb_hsize = 0;
+    *ahb_htrans = 0;
 
     tick(true);
 
@@ -118,10 +136,8 @@ uint64_t AHB::read(int width, uint64_t addr)
 
 void AHB::reset()
 {
-    *hresetn = 0;
+    *rst_l = 1;
     tick(true);
-    *hresetn = 0;
-    tick(true);
-    *hresetn = 1;
+    *rst_l = 0;
     tick(true);
 }
