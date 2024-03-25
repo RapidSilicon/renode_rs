@@ -46,8 +46,7 @@ wdt: Memory.MappedMemory @ sysbus 0xA0120000
     size: 0x4000
 i2c: Memory.MappedMemory @ sysbus 0xA0410000
     size: 0x10000
-dma: Memory.MappedMemory @ sysbus 0xA0600000
-    size: 0x10000
+
 
 // implemented
 gpt: Timers.ATCPIT100 @ sysbus 0xA0520000
@@ -59,3 +58,5 @@ uart0: UART.ATCUART100 @ sysbus 0xA0420000
     //IRQ -> plic@5
     //clockFrequency : 66000000
 
+dma: DMA.ATCDMAC100 @ sysbus 0xA0600000
+    IRQ -> scu@27
