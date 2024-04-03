@@ -16,22 +16,24 @@ struct BaseAHB
     uint32_t dataWidth;
     uint32_t addrWidth;
 
-    uint8_t *hclk;
-    uint8_t *hresetn;
-    uint8_t *hsel;          // IN
-    uint32_t *haddr;        // IN
-    uint8_t *htrans;        // IN
-    uint8_t *hwrite;        // IN
-    uint8_t *hsize;         // IN
-    uint8_t *hburst;        // IN
-    uint8_t *hprot;         // IN
-    uint32_t *hwdata;       // IN
-    uint8_t *error;         // IN
+    uint8_t *clk;
+    uint8_t *rst_l;
     //
-    uint32_t *hrdata;       // OUT
-    uint8_t *hready;        // OUT
-    uint8_t *hresp;         // OUT
-
+    uint16_t *ahb_haddr;        // IN
+    uint8_t *ahb_hburst;        // IN
+    uint8_t *ahb_hmastlock;     // IN
+    uint8_t *ahb_hprot;         // IN
+    uint8_t *ahb_hsize;         // IN
+    uint8_t *ahb_htrans;        // IN
+    uint8_t *ahb_hwrite;        // IN
+    uint32_t *ahb_hwdata;       // IN
+    uint8_t *ahb_hsel;          // IN
+    uint8_t *ahb_hreadyin;      // IN
+    uint8_t *ahb_hnonsec;       // IN
+    //
+    uint32_t *ahb_hrdata;       // OUT
+    uint8_t *ahb_hreadyout;     // OUT
+    uint8_t *ahb_hresp;         // OUT
 };
 
 struct AHB : public BaseAHB, public BaseTargetBus
