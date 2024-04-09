@@ -13,22 +13,6 @@ showAnalyzer sysbus.uart0
 
 macro reset
 """
- 
-    sysbus WriteDoubleWord 0xA0410000 0x21A8A001
-    sysbus WriteDoubleWord 0xA0410004 0xa0200100
-    sysbus WriteDoubleWord 0xA0410008 0xA0305700
-    sysbus WriteDoubleWord 0xA041000C 64
-    sysbus WriteDoubleWord 0xA0410010 0xA0410014
-
-    sysbus WriteDoubleWord 0xA0410014 0x21A8A001
-    sysbus WriteDoubleWord 0xA0410018 0xa0200100
-    sysbus WriteDoubleWord 0xA041001C 0xA0305800
-    sysbus WriteDoubleWord 0xA0410020 64
-    sysbus WriteDoubleWord 0xA0410024 0x00
-
-
-    
-
     sysbus LoadELF $bin
 
 """
