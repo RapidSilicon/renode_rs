@@ -75,7 +75,7 @@ void AHB::write(int width, uint64_t addr, uint64_t value)
     *ahb_hwdata = value;
 
     *ahb_hwrite = 1;
-    *ahb_hsize = 2;
+    *ahb_hsize = width >> 1;
 
     timeoutTick(ahb_hreadyout, 1);
 
@@ -112,7 +112,7 @@ uint64_t AHB::read(int width, uint64_t addr)
 
     tick(true);
 
-    *ahb_hsize = 2;
+    *ahb_hsize = width >> 1;
 
     timeoutTick(ahb_hreadyout, 1);
 
