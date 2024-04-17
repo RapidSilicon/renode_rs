@@ -7,13 +7,14 @@ mach create $name
 
 machine LoadPlatformDescription @platforms/cpus/rs_virgo.repl
 
-$bin ?= @/home/josfemova-rs/REPOSITORIES/N22_Bootrom/EmbeddedCommon-dev/apps/n22_application/build/n22_app.elf
+$bin ?= @//home/users/makabar/Embedded/EmbeddedCommon-dev/apps/n22_application/build/n22_app.elf
 
 showAnalyzer sysbus.uart0
 
 macro reset
 """
     sysbus LoadELF $bin
+
 """
 
 runMacro $reset
