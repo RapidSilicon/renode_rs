@@ -1,0 +1,40 @@
+using "platforms/cpus/rs_virgo.repl"
+
+user_button: Miscellaneous.Button @ gpio
+    invert: true
+    -> gpio@0
+
+
+pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
+    PadGPIOs -> gpio@0
+    
+  
+
+gpio:
+    1 -> pad@1
+    
+
+
+led: Miscellaneous.LED @ sysbus
+
+user_button: Miscellaneous.Button @ pad
+    invert: true
+    -> pad@0
+
+     
+
+
+
+//backup 
+pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
+    PadGPIOs -> gpio@0
+    PadGPIOsIn -> led@0
+gpio:
+    1 -> pad@1
+
+led: Miscellaneous.LED @ gpio 3
+    
+
+user_button: Miscellaneous.Button @ pad
+    invert: true
+    -> gpio@3

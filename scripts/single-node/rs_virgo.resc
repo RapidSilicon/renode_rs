@@ -13,7 +13,6 @@ showAnalyzer sysbus.uart0
 
 macro reset
 """
-    sysbus LoadELF $bin
 
 """
 

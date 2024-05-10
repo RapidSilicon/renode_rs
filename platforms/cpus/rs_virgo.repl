@@ -44,15 +44,19 @@ spi: Memory.MappedMemory @ sysbus 0xA0800000
     size: 0x8000
 wdt: Memory.MappedMemory @ sysbus 0xA0120000
     size: 0x4000
-i2c: Memory.MappedMemory @ sysbus 0xA0410000
-    size: 0x10000
 
+    
 
+    
 // implemented
 gpt: Timers.ATCPIT100 @ sysbus 0xA0520000
 
 gpio: GPIOPort.ATCGPIO100 @ sysbus 0xA0510000
     cfgGpioNum: 8 
+    
+gpio_A: GPIOPort.ATCGPIO100 @ sysbus 0xA0530000
+    cfgGpioNum: 8 
+    -> pad@5
 
 uart0: UART.ATCUART100 @ sysbus 0xA0420000
     //IRQ -> plic@5
@@ -60,3 +64,23 @@ uart0: UART.ATCUART100 @ sysbus 0xA0420000
 
 dma: DMA.ATCDMAC100 @ sysbus 0xA0600000
     IRQ -> scu@27
+
+pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
+    5 ->led@0
+    1 -> gpio@1
+gpio:
+    1 -> pad@1
+led: Miscellaneous.LED @ pad 1
+      
+
+user_button: Miscellaneous.Button @ pad
+    invert:true
+    -> gpio@3
+
+    
+
+
+
+
+
+   
