@@ -23,11 +23,7 @@ flash: Memory.MappedMemory @ sysbus 0xB0000000
 // =======================
 button1: Miscellaneous.Button @ sysbus
     invert: false
-    -> scu@2
-
-scu: Miscellaneous.RS_SystemControlUnit @ sysbus 0xA0110000
-    version: 0x0 
-    bcpu: cpu0
+   // -> scu@2
 
 xcb: Memory.MappedMemory @ sysbus 0xA0710000
     size: 0x10000
@@ -53,29 +49,76 @@ gpt: Timers.ATCPIT100 @ sysbus 0xA0520000
 
 gpio: GPIOPort.ATCGPIO100 @ sysbus 0xA0510000
     cfgGpioNum: 8 
+
+FPGA_GPIO:GPIOPort.ATCGPIO100 @ sysbus 0xA0540000
+    0 -> pad@32
+    1 -> pad@33
+    2 -> pad@34
+    3 -> pad@35
+    4 -> pad@36
+
     
-gpio_A: GPIOPort.ATCGPIO100 @ sysbus 0xA0530000
+GPIO_A: GPIOPort.ATCGPIO100 @ sysbus 0xA0530000
     cfgGpioNum: 8 
-    -> pad@5
+    //button connections to pad output
+    0 -> pad@0
+    1 -> pad@1
+    2 -> pad@10
+    3 -> pad@11
+    4 -> pad@12
+    5 -> pad@13
+    6 -> pad@14
+    7 -> pad@15
+
 
 uart0: UART.ATCUART100 @ sysbus 0xA0420000
     //IRQ -> plic@5
     //clockFrequency : 66000000
+    
 
 dma: DMA.ATCDMAC100 @ sysbus 0xA0600000
-    IRQ -> scu@27
+   // IRQ -> scu@27 
+   
+   //atcgpio100 to pad input
+gpio:
+    0 -> pad@16 
+    1 -> pad@17
+    2 -> pad@26
+    3 -> pad@27
+    4 -> pad@28
+    5 -> pad@29
+    6 -> pad@30
+    7 -> pad@31
 
 pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
-    5 ->led@0
-    1 -> gpio@1
-gpio:
-    1 -> pad@1
+    //pad output to led/gpio
+    0 -> GPIO_A@0   
+    1 -> GPIO_A@1
+    10-> GPIO_A@2
+    11-> GPIO_A@3
+    12-> GPIO_A@4
+    13-> GPIO_A@5
+    14-> GPIO_A@6
+    15-> GPIO_A@7
+
+    //pad input to atcgpio100
+    16 ->gpio@0
+    17 ->gpio@1
+    26 ->gpio@2
+    27 ->gpio@3
+    28 ->gpio@4
+    29 ->gpio@5
+    30 ->gpio@6
+    31 ->gpio@7
+
+
 led: Miscellaneous.LED @ pad 1
       
 
 user_button: Miscellaneous.Button @ pad
     invert:true
-    -> gpio@3
+    
+
 
     
 
