@@ -49,6 +49,15 @@ gpt: Timers.ATCPIT100 @ sysbus 0xA0520000
 
 gpio: GPIOPort.ATCGPIO100 @ sysbus 0xA0510000
     cfgGpioNum: 8 
+    //atcgpio100 to pad input
+    0 -> pad@16 
+    1 -> pad@17
+    2 -> pad@26
+    3 -> pad@27
+    4 -> pad@28
+    5 -> pad@29
+    6 -> pad@30
+    7 -> pad@31
 
 FPGA_GPIO:GPIOPort.ATCGPIO100 @ sysbus 0xA0540000
     0 -> pad@32
@@ -56,10 +65,21 @@ FPGA_GPIO:GPIOPort.ATCGPIO100 @ sysbus 0xA0540000
     2 -> pad@34
     3 -> pad@35
     4 -> pad@36
+    5 -> pad@37
+    6 -> pad@38
+    7 -> pad@39
+    8 -> pad@40
+    9 -> pad@41
+    10-> pad@42
+    11-> pad@43
+    12-> pad@44
+    13-> pad@45
+    14-> pad@46
+    15-> pad@47
 
     
 GPIO_A: GPIOPort.ATCGPIO100 @ sysbus 0xA0530000
-    cfgGpioNum: 8 
+   
     //button connections to pad output
     0 -> pad@0
     1 -> pad@1
@@ -70,6 +90,26 @@ GPIO_A: GPIOPort.ATCGPIO100 @ sysbus 0xA0530000
     6 -> pad@14
     7 -> pad@15
 
+ALT: GPIOPort.ATCGPIO100 @ sysbus 0xA0550000 
+    0 -> pad@48
+    1 -> pad@49
+    2 -> pad@58
+    3 -> pad@59
+    4 -> pad@60
+    5 -> pad@61
+    6 -> pad@62
+    7 -> pad@63
+    
+Debug: GPIOPort.ATCGPIO100 @ sysbus 0xA0560000 
+    0 -> pad@64
+    1 -> pad@65
+    2 -> pad@68
+    3 -> pad@69
+    4 -> pad@70
+    5 -> pad@71
+    6 -> pad@72
+    7 -> pad@73
+  
 
 uart0: UART.ATCUART100 @ sysbus 0xA0420000
     //IRQ -> plic@5
@@ -79,27 +119,29 @@ uart0: UART.ATCUART100 @ sysbus 0xA0420000
 dma: DMA.ATCDMAC100 @ sysbus 0xA0600000
    // IRQ -> scu@27 
    
-   //atcgpio100 to pad input
-gpio:
-    0 -> pad@16 
-    1 -> pad@17
-    2 -> pad@26
-    3 -> pad@27
-    4 -> pad@28
-    5 -> pad@29
-    6 -> pad@30
-    7 -> pad@31
+   
 
 pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
-    //pad output to led/gpio
-    0 -> GPIO_A@0   
-    1 -> GPIO_A@1
-    10-> GPIO_A@2
-    11-> GPIO_A@3
-    12-> GPIO_A@4
-    13-> GPIO_A@5
-    14-> GPIO_A@6
-    15-> GPIO_A@7
+    //pad output to led/gpio(main)
+    0 -> GPIO_A@0
+    1 -> GPIO_A@1 
+    2 -> GPIO_A@2
+    3 -> GPIO_A@3
+    4 -> GPIO_A@4
+    5 -> GPIO_A@5
+    6 -> GPIO_A@6
+    7 -> GPIO_A@7
+    8 -> GPIO_A@8
+    9 -> GPIO_A@9
+    10-> GPIO_A@10
+    11-> GPIO_A@11
+    12-> GPIO_A@12
+    13-> GPIO_A@13
+    14-> GPIO_A@14
+    15-> GPIO_A@15
+
+    //pad output to led/gpio (fpga)
+    
 
     //pad input to atcgpio100
     16 ->gpio@0
