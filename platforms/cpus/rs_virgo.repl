@@ -23,7 +23,7 @@ flash: Memory.MappedMemory @ sysbus 0xB0000000
 // =======================
 button1: Miscellaneous.Button @ sysbus
     invert: false
-    -> scu@2
+   // -> scu@2
 
 scu: Miscellaneous.RS_SystemControlUnit @ sysbus 0xA0110000
     version: 0x0 
@@ -44,19 +44,132 @@ spi: Memory.MappedMemory @ sysbus 0xA0800000
     size: 0x8000
 wdt: Memory.MappedMemory @ sysbus 0xA0120000
     size: 0x4000
-i2c: Memory.MappedMemory @ sysbus 0xA0410000
-    size: 0x10000
 
+    
 
+    
 // implemented
 gpt: Timers.ATCPIT100 @ sysbus 0xA0520000
 
 gpio: GPIOPort.ATCGPIO100 @ sysbus 0xA0510000
     cfgGpioNum: 8 
+    //atcgpio100 to pad input
+    0 -> pad@16 
+    1 -> pad@17
+    2 -> pad@26
+    3 -> pad@27
+    4 -> pad@28
+    5 -> pad@29
+    6 -> pad@30
+    7 -> pad@31
+
+FPGA_GPIO:GPIOPort.ATCGPIO100 @ sysbus 0xA0540000
+    0 -> pad@32
+    1 -> pad@33
+    2 -> pad@34
+    3 -> pad@35
+    4 -> pad@36
+    5 -> pad@37
+    6 -> pad@38
+    7 -> pad@39
+    8 -> pad@40
+    9 -> pad@41
+    10-> pad@42
+    11-> pad@43
+    12-> pad@44
+    13-> pad@45
+    14-> pad@46
+    15-> pad@47
+
+    
+GPIO_A: GPIOPort.ATCGPIO100 @ sysbus 0xA0530000
+   
+    //button connections to pad output
+    0 -> pad@0
+    1 -> pad@1
+    2 -> pad@10
+    3 -> pad@11
+    4 -> pad@12
+    5 -> pad@13
+    6 -> pad@14
+    7 -> pad@15
+
+ALT: GPIOPort.ATCGPIO100 @ sysbus 0xA0550000 
+    0 -> pad@48
+    1 -> pad@49
+    2 -> pad@58
+    3 -> pad@59
+    4 -> pad@60
+    5 -> pad@61
+    6 -> pad@62
+    7 -> pad@63
+    
+Debug: GPIOPort.ATCGPIO100 @ sysbus 0xA0560000 
+    0 -> pad@64
+    1 -> pad@65
+    2 -> pad@68
+    3 -> pad@69
+    4 -> pad@70
+    5 -> pad@71
+    6 -> pad@72
+    7 -> pad@73
+  
 
 uart0: UART.ATCUART100 @ sysbus 0xA0420000
     //IRQ -> plic@5
     //clockFrequency : 66000000
+    
 
 dma: DMA.ATCDMAC100 @ sysbus 0xA0600000
-    IRQ -> scu@27
+   // IRQ -> scu@27 
+   
+   
+
+pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
+    //pad output to led/gpio(main)
+    0 -> GPIO_A@0
+    1 -> GPIO_A@1 
+    2 -> GPIO_A@2
+    3 -> GPIO_A@3
+    4 -> GPIO_A@4
+    5 -> GPIO_A@5
+    6 -> GPIO_A@6
+    7 -> GPIO_A@7
+    8 -> GPIO_A@8
+    9 -> GPIO_A@9
+    10-> GPIO_A@10
+    11-> GPIO_A@11
+    12-> GPIO_A@12
+    13-> GPIO_A@13
+    14-> GPIO_A@14
+    15-> GPIO_A@15
+
+    //pad output to led/gpio (fpga)
+    
+
+    //pad input to atcgpio100
+    16 ->gpio@0
+    17 ->gpio@1
+    26 ->gpio@2
+    27 ->gpio@3
+    28 ->gpio@4
+    29 ->gpio@5
+    30 ->gpio@6
+    31 ->gpio@7
+
+
+led: Miscellaneous.LED @ pad 1
+      
+
+user_button: Miscellaneous.Button @ pad
+    invert:true
+    
+
+
+    
+
+
+
+
+
+   
