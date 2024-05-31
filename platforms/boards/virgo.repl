@@ -1,0 +1,4 @@
+using "platforms/cpus/rs_virgo.repl"
+
+UserButton: Miscellaneous.Button @ gpio 0
+    -> gpio@0

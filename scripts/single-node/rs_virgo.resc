@@ -5,7 +5,7 @@ using sysbus
 $name?="Virgo"
 mach create $name
 
-machine LoadPlatformDescription @platforms/cpus/rs_virgo.repl
+machine LoadPlatformDescription @platforms/boards/virgo.repl
 
 
 

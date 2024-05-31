@@ -25,10 +25,6 @@ button1: Miscellaneous.Button @ sysbus
     invert: false
    // -> scu@2
 
-scu: Miscellaneous.RS_SystemControlUnit @ sysbus 0xA0110000
-    version: 0x0 
-    bcpu: cpu0
-
 xcb: Memory.MappedMemory @ sysbus 0xA0710000
     size: 0x10000
 
@@ -44,9 +40,6 @@ spi: Memory.MappedMemory @ sysbus 0xA0800000
     size: 0x8000
 wdt: Memory.MappedMemory @ sysbus 0xA0120000
     size: 0x4000
-
-    
-
     
 // implemented
 gpt: Timers.ATCPIT100 @ sysbus 0xA0520000
@@ -119,17 +112,14 @@ uart0: UART.ATCUART100 @ sysbus 0xA0420000
     //IRQ -> plic@5
     //clockFrequency : 66000000
     
-
 dma: DMA.ATCDMAC100 @ sysbus 0xA0600000
    // IRQ -> scu@27 
    
-   
-
 pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
     //pad output to led/gpio(main)
-    0 -> GPIO_A@0
-    1 -> GPIO_A@1 
-    2 -> GPIO_A@2
+   // 0 -> led@0
+   // 1 -> GPIO_A@1 
+   // 2 -> GPIO_A@2
     3 -> GPIO_A@3
     4 -> GPIO_A@4
     5 -> GPIO_A@5
@@ -144,11 +134,8 @@ pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
     14-> GPIO_A@14
     15-> GPIO_A@15
 
-    //pad output to led/gpio (fpga)
-    
-
     //pad input to atcgpio100
-    16 ->gpio@0
+  //16 ->gpio@0
     17 ->gpio@1
     26 ->gpio@2
     27 ->gpio@3
@@ -159,17 +146,8 @@ pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
 
 
 led: Miscellaneous.LED @ pad 1
-      
 
-user_button: Miscellaneous.Button @ pad
-    invert:true
-    
-
+user_button: Miscellaneous.Button @ sysbus
+    IRQ -> pad @ 0
 
     
-
-
-
-
-
-   
