@@ -32,3 +32,7 @@ plic: IRQControllers.PlatformLevelInterruptController @ sysbus 0xE4000000
     numberOfSources: 1023
     numberOfContexts: 15872
     prioritiesEnabled: true
+
+user_button: Miscellaneous.Button @ sysbus
+    -> plic @ 7
+

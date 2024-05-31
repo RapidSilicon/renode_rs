@@ -110,6 +110,10 @@ egu4 : Miscellaneous.NRF52840_EGU @ sysbus 0x40018000
 egu5 : Miscellaneous.NRF52840_EGU @ sysbus 0x40019000
     -> nvic@25
 
+UserButton: Miscellaneous.Button @ gpio0 0
+    invert : false
+    -> gpio0@0
+
 sysbus:
     init:
         ApplySVD @https://dl.antmicro.com/projects/renode/svd/NRF52840.svd.gz

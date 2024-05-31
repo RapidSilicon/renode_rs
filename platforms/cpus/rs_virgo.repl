@@ -123,9 +123,9 @@ dma: DMA.ATCDMAC100 @ sysbus 0xA0600000
 
 pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
     //pad output to led/gpio(main)
-    0 -> GPIO_A@0
-    1 -> GPIO_A@1 
-    2 -> GPIO_A@2
+   // 0 -> led@0
+   // 1 -> GPIO_A@1 
+   // 2 -> GPIO_A@2
     3 -> GPIO_A@3
     4 -> GPIO_A@4
     5 -> GPIO_A@5
@@ -139,12 +139,8 @@ pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
     13-> GPIO_A@13
     14-> GPIO_A@14
     15-> GPIO_A@15
-
-    //pad output to led/gpio (fpga)
-    
-
     //pad input to atcgpio100
-    16 ->gpio@0
+  //16 ->gpio@0
     17 ->gpio@1
     26 ->gpio@2
     27 ->gpio@3
@@ -157,15 +153,7 @@ pad: GPIOPort.Virgo_pad @ sysbus 0xA4100000
 led: Miscellaneous.LED @ pad 1
       
 
-user_button: Miscellaneous.Button @ pad
-    invert:true
-    
-
+user_button: Miscellaneous.Button @ sysbus
+    IRQ -> pad @ 0
 
     
-
-
-
-
-
-   
