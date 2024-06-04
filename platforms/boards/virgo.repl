@@ -1,4 +1,39 @@
 using "platforms/cpus/rs_virgo.repl"
+pad:
+    0 -> led0@0
+    1 -> led1@0
+    2 -> led2@0
+    3 -> led3@0
+    4 -> led4@0
+    5 -> led5@0
+    6 -> led6@0
+    7 -> led7@0
+    8 -> led8@0
 
-UserButton: Miscellaneous.Button @ gpio 0
-    -> gpio@0
+led0: Miscellaneous.LED @ pad 0
+led1: Miscellaneous.LED @ pad 1
+led2: Miscellaneous.LED @ pad 2
+led3: Miscellaneous.LED @ pad 3
+led4: Miscellaneous.LED @ pad 4
+led5: Miscellaneous.LED @ pad 5
+led6: Miscellaneous.LED @ pad 6
+led7: Miscellaneous.LED @ pad 7
+led8: Miscellaneous.LED @ pad 8
+
+UserButton0: Miscellaneous.Button @ pad 9
+    -> pad@09
+UserButton1: Miscellaneous.Button @ pad 10
+    -> pad@010
+UserButton2: Miscellaneous.Button @ pad 11
+    -> pad@011
+UserButton3: Miscellaneous.Button @ pad 12
+    -> pad@012
+UserButton4: Miscellaneous.Button @ pad 13
+    -> pad@013
+UserButton5: Miscellaneous.Button @ pad 14
+    -> pad@014
+UserButton6: Miscellaneous.Button @ pad 15
+    -> pad@015
+
+
+
