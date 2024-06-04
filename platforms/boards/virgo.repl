@@ -21,19 +21,19 @@ led7: Miscellaneous.LED @ pad 7
 led8: Miscellaneous.LED @ pad 8
 
 UserButton0: Miscellaneous.Button @ pad 9
-    -> pad@09
+    -> pad@9
 UserButton1: Miscellaneous.Button @ pad 10
-    -> pad@010
+    -> pad@10
 UserButton2: Miscellaneous.Button @ pad 11
-    -> pad@011
+    -> pad@11
 UserButton3: Miscellaneous.Button @ pad 12
-    -> pad@012
+    -> pad@12
 UserButton4: Miscellaneous.Button @ pad 13
-    -> pad@013
+    -> pad@13
 UserButton5: Miscellaneous.Button @ pad 14
-    -> pad@014
+    -> pad@14
 UserButton6: Miscellaneous.Button @ pad 15
-    -> pad@015
+    -> pad@15
 
 
 
