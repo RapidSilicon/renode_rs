@@ -108,5 +108,4 @@ pad: Miscellaneous.Virgo_pad @ sysbus 0xA4100000
     46 ->FPGA_GPIO@14
     47 ->FPGA_GPIO@15
 // ALT Function is in range 48-63
-// Debug Mode is in range 64-80
-    
+// Debug Mode is in range 64-80    
