@@ -5,7 +5,7 @@ using sysbus
 $name?="Virgo"
 mach create $name
 
-machine LoadPlatformDescription @platforms/boards/virgo.repl
+machine LoadPlatformDescription @platforms/boards/rs_virgo-eval.repl
 
 $bin ?= @/nfs_home/makbar/100dmac_Embedded/EmbeddedCommon-dev/apps/n22_application/build/n22_app.elf
 

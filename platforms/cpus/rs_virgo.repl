@@ -107,3 +107,4 @@ pad: Miscellaneous.Virgo_pad @ sysbus 0xA4100000
     45 ->FPGA_GPIO@13
     46 ->FPGA_GPIO@14
     47 ->FPGA_GPIO@15
+    
