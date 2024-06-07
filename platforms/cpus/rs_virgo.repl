@@ -25,6 +25,10 @@ button1: Miscellaneous.Button @ sysbus
     invert: false
    // -> scu@2
 
+scu: Miscellaneous.RS_SystemControlUnit @ sysbus 0xA0110000
+    version: 0x0 
+    bcpu: cpu0
+
 xcb: Memory.MappedMemory @ sysbus 0xA0710000
     size: 0x10000
 
@@ -91,6 +95,8 @@ pad: Miscellaneous.Virgo_pad @ sysbus 0xA4100000
     30 ->gpio@6
     31 ->gpio@7
 //fpga_gpio I/Os are in range 32-47
+//this mode is currently supported by using ATCGPIO100 for simple implementation , 
+//however can be modified later.
     32 ->FPGA_GPIO@0
     33 ->FPGA_GPIO@1
     34 ->FPGA_GPIO@2
