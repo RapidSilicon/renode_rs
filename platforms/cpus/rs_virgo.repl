@@ -21,9 +21,6 @@ flash: Memory.MappedMemory @ sysbus 0xB0000000
 // =======================
 // platform peripherals
 // =======================
-button1: Miscellaneous.Button @ sysbus
-    invert: false
-   // -> scu@2
 
 scu: Miscellaneous.RS_SystemControlUnit @ sysbus 0xA0110000
     version: 0x0 
