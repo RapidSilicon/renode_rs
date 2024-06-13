@@ -5,15 +5,24 @@ using sysbus
 $name?="Virgo"
 mach create $name
 
-machine LoadPlatformDescription @platforms/cpus/rs_virgo.repl
+machine LoadPlatformDescription @platforms/boards/rs_virgo-eval.repl
 
-$bin ?= @//home/users/makabar/Embedded/EmbeddedCommon-dev/apps/n22_application/build/n22_app.elf
+$bin ?= @/nfs_home/makbar/100dmac_Embedded/EmbeddedCommon-dev/apps/n22_application/build/n22_app.elf
 
 showAnalyzer sysbus.uart0
 
 macro reset
 """
-    sysbus LoadELF $bin
+sysbus LoadELF $bin
+logLevel -1 pad.led0
+logLevel -1 pad.led1
+logLevel -1 pad.led2
+logLevel -1 pad.led3
+logLevel -1 pad.led4
+logLevel -1 pad.led5
+logLevel -1 pad.led6
+logLevel -1 pad.led7
+logLevel -1 pad.led8
 
 """
 
